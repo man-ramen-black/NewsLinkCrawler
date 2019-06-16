@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-	
         <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -126,6 +125,7 @@
 		    },
 		    error : function(){
 			$(".progress_bar").append("<li style='width:"+(1/links.length*100)+"%' class='bad'></li>");
+			alert(page);
 		    }
 		});
 	    }
@@ -136,6 +136,7 @@
 		
 		var linkText = "";
 		var html = "";
+		var count = 0; 
 		for(var i = 0 ; i < links.length; i++){
 		    if(!links[i]){
 			continue;
@@ -143,8 +144,10 @@
 		    for(var j = 0 ; j < links[i].length; j++){
 			linkText += links[i][j]+"\n";
 			html += "<li><a target='_blank' href='"+links[i][j]+"'>"+links[i][j]+"</a></li>";
+			count++;
 		    }
 		}
+		$(".result_view h2").text("결과 : "+numberFormat(count)+"건");
 		$("#result_container").append(html);
 		$("#result").val(linkText);
 		$("#submit_btn").show();
@@ -231,6 +234,20 @@
 		}
 	    }
 	    
+	    function setNewsCode(select){
+		var news_code = $(select).find("option:selected").attr("data-news_code");
+		if(!news_code){
+		    $("input[name=news_code]").val("");
+		}else{
+		    $("input[name=news_code]").val(news_code);
+		}
+	    }
+	    
+	    function numberFormat(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	    }
+
+	    
 	</script>
     </head>
     <body>
@@ -238,14 +255,21 @@
 	    <div class="main_view">
 		<h1>뉴스 링크 크롤러</h1>
 		<form id="form">
+		    <input type="hidden" name="news_code"/>
 		    <table>
 			<tr>
-			    <th>신문사</th>
+			    <th>언론사</th>
 			    <td>
-				<select id="news">
+				<select id="news" onchange="setNewsCode(this)">
 				    <option value="chosun" data-url="http://srchdb1.chosun.com/pdf/i_service/pdf_SearchList.jsp">조선일보</option>
 				    <option value="donga" data-url="http://news.donga.com/search">동아일보</option>
 				    <option value="joongang" data-url="http://bitly.kr/jM3LKL">중앙일보</option>
+				    <option value="naver" data-url="https://bit.ly/2ZBddmj" data-news_code="media">미디어오늘(네이버)</option>
+				    <option value="naver" data-url="https://bit.ly/2ZBddmj" data-news_code="yna">연합뉴스(네이버)</option>
+				    <option value="naver" data-url="https://bit.ly/2ZBddmj" data-news_code="ohmy">오마이뉴스(네이버)</option>
+				    <option value="naver" data-url="https://bit.ly/2ZBddmj" data-news_code="pressian">프레시안(네이버)</option>
+				    <option value="naver" data-url="https://bit.ly/2ZBddmj" data-news_code="dailian">데일리안(네이버)</option>
+				    <option value="naver" data-url="https://bit.ly/2ZBddmj" data-news_code="newdaily">뉴데일리(네이버)</option>
 				</select>
 				<button type="button" onclick="window.open($('#news option:selected').attr('data-url'))">바로가기</button>
 			    </td>
@@ -263,6 +287,13 @@
 			    <td>
 				<input type="text" class="date" name="sdate" size="6" value="<?php echo date("Y-m-d", strtotime("-1 year"))?>" onkeydown="onEnter(submitForm)"> 
 				~ <input type="text" class="date" name="edate" size="6" value="<?php echo date("Y-m-d")?>" onkeydown="onEnter(submitForm)">
+			    </td>
+			</tr>
+			<tr>
+			    <th>네이버 뉴스</th>
+			    <td style="font-size:0.85em">
+				<input type="checkbox" name="naver_news" value="1"> 체크 시 링크를 네이버 뉴스 링크로 추출합니다.<br>
+				<b>※(네이버) 언론사 선택 시에만 동작합니다.</b>
 			    </td>
 			</tr>
 		    </table>
