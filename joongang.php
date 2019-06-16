@@ -37,7 +37,7 @@
 	//종료일
 	"EndSearchDate" => $edate,
 	//검색어
-	"Keyword" => $text,
+	"Keyword" => $query,
 	//페이지
 	"page" => $page,
     );

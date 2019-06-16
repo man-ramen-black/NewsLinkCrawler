@@ -256,7 +256,7 @@
 			</tr>
 			<tr>
 			    <th>검색어</th>
-			    <td><input type="text" name="text" placeholder="검색어를 입력해주세요." onkeydown="onEnter(submitForm)"></td>
+			    <td><input type="text" name="query" placeholder="검색어를 입력해주세요." onkeydown="onEnter(submitForm)"></td>
 			</tr>
 			<tr>
 			    <th>발행일</th>

@@ -38,7 +38,7 @@
 	//종료일
 	"v2" => $edate,
 	//검색어
-	"query" => $text,
+	"query" => $query,
 	//페이지
 	"p" => $page,
     );

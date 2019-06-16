@@ -34,7 +34,7 @@
     
     $data = array(
 	//검색어
-	"FV" => iconv("UTF-8", "EUC-KR", $text),
+	"FV" => iconv("UTF-8", "EUC-KR", $query),
 	//제목
 	"TI" => "TI",
 	//본문
