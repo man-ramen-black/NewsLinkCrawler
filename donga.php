@@ -24,7 +24,7 @@
     $sdate = date("Ymd", strtotime($sdate));
     $edate = date("Ymd", strtotime($edate));
     
-    $url = "http://news.donga.com/search?";
+    $url = "http://www.donga.com/news/search?";
 	
     $data = array(
 	//뉴스 동아일보
@@ -49,7 +49,7 @@
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt( $ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.2 (KHTML, like Gecko) Chrome/22.0.1216.0 Safari/537.2" );
+    curl_setopt( $ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36" );
     $response = curl_exec($ch);
     curl_close($ch);
     $html = str_get_html($response);
